@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:text="TÙY CHỌN CHỨC NĂNG"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:background="@color/colorPrimary"
+        android:textSize="30sp" />
+    <Button
+        android:id="@+id/gv"
+        android:layout_weight="2"
+        android:layout_width="fill_parent"
+        android:layout_height="0sp"
+        android:gravity="center"
+        android:padding="8dip"
+        android:textSize="50dip"
+        android:textStyle="bold"
+        android:text="Giáo Viên"
+        android:textColor="#FFFFFF"
+        tools:ignore="HardcodedText,SpUsage"
+        android:background="@color/colorPrimary"/>
+    <Button
+        android:id="@+id/hs"
+        android:layout_weight="2"
+        android:layout_width="fill_parent"
+        android:layout_height="0sp"
+        android:gravity="center"
+        android:padding="8dip"
+        android:textSize="50dip"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:background="@color/colorPrimary"
+        android:text="Học sinh"
+        tools:ignore="HardcodedText,SpUsage" />
+    <Button
+        android:id="@+id/gc"
+        android:layout_weight="2"
+        android:layout_width="fill_parent"
+        android:layout_height="0sp"
+        android:gravity="center"
+        android:padding="8dip"
+        android:textColor="#FFFFFF"
+        android:textSize="50dip"
+        android:textStyle="bold"
+        android:background="@color/colorPrimary"
+        android:text="Ghi chú"
+        tools:ignore="HardcodedText,SpUsage" />
+
+</LinearLayout>

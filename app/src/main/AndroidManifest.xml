@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+        package="com.embeddedlog.LightUpDroid"
+        android:versionCode="1" android:versionName="0.1">
+
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.DEVICE_POWER" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-sdk android:minSdkVersion="14" android:targetSdkVersion="19" ></uses-sdk>
+
+    <application android:label="Reminder"
+                 android:icon="@drawable/ic_lock_idle_alarm"
+                 android:requiredForAllUsers="true"
+        android:theme="@style/AppTheme"
+                 android:supportsRtl="true">
+
+        <provider android:name="com.embeddedlog.LightUpDroid.provider.ClockProvider"
+                android:authorities="com.embeddedlog.LightUpDroid"
+                android:exported="false" />
+        //First
+        <activity android:name=".telephony.First"
+            android:theme="@style/HiddenTitleTheme"
+            android:configChanges="orientation|screenSize" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".MainActivity"
+            android:theme="@style/HiddenTitleTheme"/>
+        <activity
+            android:name="com.embeddedlog.LightUpDroid.AlarmActivity"
+            android:label="Nhắc nhở"
+            />
+        <activity
+            android:name="com.embeddedlog.LightUpDroid.preferences.AlarmPreferencesActivity"
+            android:label="Thêm nhắc nhở"
+            />
+        <!--<activity-->
+            <!--android:name="A"-->
+            <!--android:label="Đặt lịch"-->
+            <!--android:parentActivityName="com.embeddedlog.LightUpDroid.AlarmActivity">-->
+            <!--&lt;!&ndash; Parent activity meta-data to support API level 7+ &ndash;&gt;-->
+            <!--<meta-data-->
+                <!--android:name="android.support.PARENT_ACTIVITY"-->
+                <!--android:value="com.embeddedlog.LightUpDroid.AlarmActivity" />-->
+        <!--</activity>-->
+        <activity
+            android:name=".EditActivity"
+            android:theme="@style/HiddenTitleTheme"
+            android:configChanges="orientation|screenSize"
+            android:parentActivityName=".MainActivity" >
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+        <service
+            android:process="com.embeddedlog.LightUpDroid.serviceProcess"
+            android:name="com.embeddedlog.LightUpDroid.service.AlarmService"
+            android:label="AlarmService"
+            >
+        </service>
+        <receiver android:name="com.embeddedlog.LightUpDroid.service.AlarmServiceBroadcastReciever" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+        <activity
+            android:name = "com.embeddedlog.LightUpDroid.alert.AlarmAlertActivity"
+            android:label="AlarmAlertActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <receiver android:name="com.embeddedlog.LightUpDroid.alert.AlarmAlertBroadcastReciever" >
+        </receiver>
+        <receiver android:name = "com.embeddedlog.LightUpDroid.telephony.PhoneStateChangedBroadcastReciever">
+            <intent-filter>
+                <action android:name="android.intent.action.PHONE_STATE" />
+            </intent-filter>
+        </receiver>
+        <activity android:name="com.embeddedlog.LightUpDroid.DeskClock"
+
+                android:theme="@style/DeskClock"
+                android:screenOrientation="portrait"
+                android:launchMode="singleTask"
+                >
+
+        </activity>
+
+        <activity-alias android:name="DockClock"
+                android:targetActivity="com.embeddedlog.LightUpDroid.DeskClock"
+                android:theme="@style/DeskClock"
+                android:launchMode="singleTask"
+                android:enabled="@bool/config_dockAppEnabled"
+                >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.DESK_DOCK" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity android:name="com.embeddedlog.LightUpDroid.SettingsActivity"
+                android:label="@string/settings"
+                android:theme="@style/SettingsTheme"
+                android:screenOrientation="portrait"
+                android:taskAffinity=""
+                android:excludeFromRecents="true"
+                >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name="com.embeddedlog.LightUpDroid.worldclock.CitiesActivity"
+                android:label="@string/cities_activity_title"
+                android:theme="@style/CitiesTheme"
+                android:screenOrientation="portrait"
+                android:taskAffinity=""
+                android:excludeFromRecents="true"
+                >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name="com.embeddedlog.LightUpDroid.alarms.AlarmActivity"
+                android:taskAffinity=""
+                android:excludeFromRecents="true"
+                android:theme="@style/AlarmAlertFullScreenTheme"
+                android:windowSoftInputMode="stateAlwaysHidden"
+                android:showOnLockScreen="true"
+                android:configChanges="orientation|screenSize|keyboardHidden|keyboard|navigation"/>
+
+        <activity android:name="com.embeddedlog.LightUpDroid.ScreensaverActivity"
+                android:excludeFromRecents="true"
+                android:taskAffinity=""
+                android:theme="@style/ScreensaverActivityTheme"
+                android:configChanges="orientation|screenSize|keyboardHidden|keyboard" />
+
+        <receiver android:name="com.embeddedlog.LightUpDroid.alarms.AlarmStateManager"
+                  android:exported="false">
+        </receiver>
+
+        <service android:name="com.embeddedlog.LightUpDroid.alarms.AlarmService"
+                 android:exported="false">
+        </service>
+
+        <activity android:name="com.embeddedlog.LightUpDroid.HandleApiCalls"
+                android:theme="@android:style/Theme.NoDisplay"
+                android:excludeFromRecents="true"
+                android:permission="com.android.alarm.permission.SET_ALARM">
+            <intent-filter>
+                <action android:name="android.intent.action.SET_ALARM" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SHOW_ALARMS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SET_TIMER" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity-alias android:name="HandleSetAlarm"
+            android:targetActivity="com.embeddedlog.LightUpDroid.HandleApiCalls"
+            android:exported="true">
+        </activity-alias>
+
+
+        <receiver android:name="com.embeddedlog.LightUpDroid.AlarmInitReceiver">
+            <intent-filter android:priority="1000">
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.TIME_SET" />
+                <action android:name="android.intent.action.TIMEZONE_CHANGED" />
+                <action android:name="android.intent.action.LOCALE_CHANGED" />
+            </intent-filter>
+        </receiver>
+
+        <!-- Dream (screensaver) implementation -->
+        <service android:name="com.embeddedlog.LightUpDroid.Screensaver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.service.dreams.DreamService" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data
+                android:name="android.service.dream"
+                android:resource="@xml/dream_info" />
+        </service>
+
+        <!-- Settings activity for screensaver -->
+        <activity android:name="com.embeddedlog.LightUpDroid.ScreensaverSettingsActivity"
+                android:label="@string/screensaver_settings"
+                android:theme="@android:style/Theme.Holo"
+                android:taskAffinity=""
+                android:excludeFromRecents="true"
+                android:exported="true"
+                >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+
+    </application>
+</manifest>
+
